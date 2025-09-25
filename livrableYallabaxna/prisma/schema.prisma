@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./prisma/dev.db"
+}
+
+enum Status {
+  EN_COURS
+  TERMINEE
+}
+
+enum PermissionType {
+  LIRE
+  MODIFIER
+  SUPPRIMER
+}
+
+model taskFadil {
+  id               Int          @id @default(autoincrement())
+  nameFadil        String
+  descriptionFadil String
+  status           Status       @default(EN_COURS)
+  imageUrl         String?
+  audioUrl         String?
+  startDate        DateTime?
+  endDate          DateTime?
+  userId           Int? // créateur de la tâche
+  assignedUserId   Int? // utilisateur assigné à la tâche
+  user             User?        @relation("TaskCreator", fields: [userId], references: [id])
+  assignedUser     User?        @relation("TaskAssignee", fields: [assignedUserId], references: [id])
+  permissions      Permission[]
+  chat             Chat[]
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+
+  taskFadil     taskFadil[] @relation("TaskCreator") // tâches créées par cet utilisateur
+  assignedTasks taskFadil[] @relation("TaskAssignee") // tâches assignées à cet utilisateur
+  permissions   Permission[] // tâches partagées avec lui + ses droits
+  chat          Chat[]
+}
+
+model Permission {
+  id     Int            @id @default(autoincrement())
+  type   PermissionType
+  userId Int
+  taskId Int
+
+  user User      @relation(fields: [userId], references: [id])
+  task taskFadil @relation(fields: [taskId], references: [id])
+
+  @@unique([userId, taskId, type])
+}
+
+model Chat {
+  id        Int      @id @default(autoincrement())
+  message   String
+  userId    Int
+  taskId    Int
+  timestamp DateTime @default(now())
+
+  user User      @relation(fields: [userId], references: [id])
+  task taskFadil @relation(fields: [taskId], references: [id])
+}

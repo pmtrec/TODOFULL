@@ -1,0 +1,192 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fullName": "Admin Demo",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "avatar": "/uploads/avatars/admin.png",
+      "role": "admin",
+      "createdAt": "2025-09-24T08:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "fullName": "Alice Dupont",
+      "email": "alice@example.com",
+      "password": "alice123",
+      "avatar": "/uploads/avatars/alice.png",
+      "role": "user",
+      "createdAt": "2025-09-24T09:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "fullName": "Bob Martin",
+      "email": "bob@example.com",
+      "password": "bob123",
+      "avatar": "/uploads/avatars/bob.png",
+      "role": "user",
+      "createdAt": "2025-09-24T10:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "fullName": "Papa Malick TEUW",
+      "email": "teuwpapamalick@gmail.com",
+      "password": "pathe1234",
+      "role": "user",
+      "createdAt": "2025-09-25T14:31:44.178Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "sess_1_exampletoken",
+      "userId": 2,
+      "createdAt": "2025-09-24T10:30:00.000Z",
+      "expiresAt": "2025-09-25T10:30:00.000Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": 101,
+      "title": "Préparer le pitch",
+      "description": "Rédiger le pitch pour la réunion, inclure 3 slides.",
+      "creatorId": 2,
+      "creatorName": "Alice Dupont",
+      "assignees": [
+        {
+          "userId": 3,
+          "permissions": [
+            "read",
+            "write"
+          ]
+        }
+      ],
+      "attachments": {
+        "image": {
+          "url": "/uploads/tasks/101-default.jpg",
+          "name": "default.jpg",
+          "sizeBytes": 45321,
+          "width": 1200,
+          "height": 800
+        },
+        "audio": {
+          "url": "/uploads/tasks/101-note.mp3",
+          "name": "note_101.mp3",
+          "sizeBytes": 120000,
+          "durationSeconds": 12
+        }
+      },
+      "status": "in_progress",
+      "priority": "normal",
+      "startAt": "2025-09-25T09:00:00.000Z",
+      "endAt": "2025-09-25T11:00:00.000Z",
+      "createdAt": "2025-09-24T11:00:00.000Z",
+      "updatedAt": "2025-09-24T11:30:00.000Z",
+      "notifications": {
+        "notifyOnComplete": true,
+        "notifyBeforeMinutes": 10
+      },
+      "chatId": 201
+    },
+    {
+      "id": 102,
+      "title": "Designer mockups",
+      "description": "Créer 3 mockups pour l'écran d'accueil. Image par défaut fournie.",
+      "creatorId": 3,
+      "creatorName": "Bob Martin",
+      "assignees": [
+        {
+          "userId": 2,
+          "permissions": [
+            "read"
+          ]
+        }
+      ],
+      "attachments": {
+        "image": {
+          "url": "/uploads/tasks/102-default.jpg",
+          "name": "default_102.jpg",
+          "sizeBytes": 150045,
+          "width": 1600,
+          "height": 900
+        },
+        "audio": null
+      },
+      "status": "todo",
+      "priority": "urgent",
+      "startAt": "2025-09-26T08:00:00.000Z",
+      "endAt": "2025-09-26T12:00:00.000Z",
+      "createdAt": "2025-09-24T12:00:00.000Z",
+      "updatedAt": "2025-09-24T12:05:00.000Z",
+      "notifications": {
+        "notifyOnComplete": true,
+        "notifyBeforeMinutes": 10
+      },
+      "chatId": 202
+    }
+  ],
+  "chats": [
+    {
+      "id": 201,
+      "taskId": 101,
+      "messages": [
+        {
+          "id": 1,
+          "senderId": 2,
+          "senderName": "Alice Dupont",
+          "text": "Je commence la première version, je vous tiens au courant.",
+          "createdAt": "2025-09-24T11:05:00.000Z"
+        },
+        {
+          "id": 2,
+          "senderId": 3,
+          "senderName": "Bob Martin",
+          "text": "Parfait, merci. Peux-tu ajouter une section objectifs ?",
+          "createdAt": "2025-09-24T11:07:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": 202,
+      "taskId": 102,
+      "messages": []
+    }
+  ],
+  "notifications": [
+    {
+      "id": 301,
+      "userId": 3,
+      "taskId": 101,
+      "type": "time_warning",
+      "message": "Il reste 10 minutes avant la fin de la tâche 'Préparer le pitch'.",
+      "isRead": false,
+      "createdAt": "2025-09-25T10:50:00.000Z"
+    },
+    {
+      "id": 302,
+      "userId": 2,
+      "taskId": 102,
+      "type": "assigned",
+      "message": "Vous avez été assigné(e) à la tâche 'Designer mockups'.",
+      "isRead": false,
+      "createdAt": "2025-09-24T12:06:00.000Z"
+    }
+  ],
+  "settings": {
+    "maxImageSizeBytes": 2097152,
+    "maxAudioDurationSeconds": 15,
+    "allowedImageTypes": [
+      "image/jpeg",
+      "image/png",
+      "image/webp"
+    ],
+    "allowedAudioTypes": [
+      "audio/webm",
+      "audio/mp3",
+      "audio/wav"
+    ]
+  },
+  "meta": {
+    "version": "1.0.0",
+    "description": "DB pour Todo Avancé - JSON Server"
+  }
+}
